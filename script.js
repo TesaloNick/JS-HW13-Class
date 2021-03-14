@@ -49,7 +49,11 @@ class Contacts{
 }
 
 class ContactsApp extends Contacts{
-
+    app(){
+        let div = document.createElement('div')
+        div.classList.add('contacts')
+        document.body.appendChild(div)
+    }
 }
 
 
@@ -69,3 +73,8 @@ list.edit(2, {
     address: 'Pinsk',
 })
 list.remove(3)
+
+const list1 = new ContactsApp()
+list1.add(4, 'John', 'John@gmail.com', 'Memphis', '+375 44 222-22-22')
+list1.app()
+console.log(list1);
