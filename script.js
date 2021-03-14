@@ -4,9 +4,9 @@ class Users {
     }
     edit(obj) {
         for (let key1 in obj) {
-            if (key1 !== undefined) {
+            // if (key1 !== undefined) {
                 this.data[key1] = obj[key1]
-            }
+            // }
         }
     }
     get() {
@@ -23,20 +23,23 @@ class Contacts extends Users{
         this.dataUsers.push(data)
         // for (let key of this.dataUsers) {
         //     console.log(key.id);
-        //     console.log(this.dataUsers);
         // }
+        console.log(this.dataUsers);
         
     }
     edit(id, obj) {
-        super.edit(obj)
+        // super.edit(obj)
         for (let key of this.dataUsers) {
             if (+key.id === 2) {
-                super.edit(obj)
-                console.log(key);
+                for (let key1 in obj) {
+                    key[key1] = obj[key1]
+                }
+                // super.edit(obj)
             }
-            // console.log(key.id);
         }
-        
+        console.log(this.dataUsers);
+    }
+    remove(id) {
 
     }
 }
