@@ -3,9 +3,9 @@ class Users {
         this.data = {id: idData, name: nameData, email: emailData, address: addressData, phone: phoneData}
     }
     edit(obj) {
-        for (let key1 in obj) {
-            if (obj[key1] !== undefined){
-                this.data[key1] = obj[key1]
+        for (let key in obj) {
+            if (obj[key] !== undefined){
+                this.data[key] = obj[key]
             }
         }
     }
@@ -33,7 +33,7 @@ class Contacts{
                 }
             }
         }
-        console.log(this.data);
+        // console.log(this.data);
     }
     remove(id) {
         for (let i=0; i< this.data.length; i++) {
@@ -41,12 +41,23 @@ class Contacts{
                 this.data.splice(i, 1)
             }
         }
-        console.log(this.data);
+        // console.log(this.data);
     }
     get() {
         return this.data
     }
 }
+
+class ContactsApp extends Contacts{
+
+}
+
+
+const me = new Users(3, 'Nick', 'Tesa@gmail.com', 'Parokhonsk', '+375 44 646-44-44')
+me.edit({
+    email: 'Nick@gmail.com',
+    address: 'Pinsk',
+})
 
 const list = new Contacts()
 list.add(3, 'Nick', 'Tesa@gmail.com', 'Parokhonsk', '+375 44 646-44-44')
