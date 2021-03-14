@@ -1,65 +1,60 @@
 class Users {
-    constructor(data) {
-        this.data = data
+    constructor(idData, nameData, emailData, addressData, phoneData) {
+        this.data = {id: idData, name: nameData, email: emailData, address: addressData, phone: phoneData}
     }
     edit(obj) {
         for (let key1 in obj) {
-            // if (key1 !== undefined) {
+            if (obj[key1] !== undefined){
                 this.data[key1] = obj[key1]
-            // }
+            }
         }
     }
     get() {
-        console.log(this.data);
+        return this.data
     }
 }
 
-class Contacts extends Users{
-    constructor(data) {
-        super(data)
-        this.dataUsers = []
+class Contacts{
+    constructor() {
+        this.data = []
     }
-    add(data){
-        this.dataUsers.push(data)
-        // for (let key of this.dataUsers) {
-        //     console.log(key.id);
-        // }
-        console.log(this.dataUsers);
-        
+    add(idData, nameData, emailData, addressData, phoneData){
+        let newUser = new Users(idData, nameData, emailData, addressData, phoneData)
+        // console.log(newUser.data);
+        this.data.push(newUser.data)
     }
     edit(id, obj) {
-        // super.edit(obj)
-        for (let key of this.dataUsers) {
+        for (let key of this.data) {
             if (+key.id === 2) {
-                for (let key1 in obj) {
-                    key[key1] = obj[key1]
+                for (let key1 in key) {
+                    if (obj[key1] !== undefined){
+                        key[key1] = obj[key1]
+                    }
                 }
-                // super.edit(obj)
             }
         }
-        console.log(this.dataUsers);
+        console.log(this.data);
     }
     remove(id) {
-
+        for (let i=0; i< this.data.length; i++) {
+            if (this.data[i].id === id) {
+                this.data.splice(i, 1)
+            }
+        }
+        console.log(this.data);
+    }
+    get() {
+        return this.data
     }
 }
 
 const list = new Contacts()
-list.add({
-    id: '1',
-    name: 'Nick',
-    email: 'Tesa@gmail.com',
-    address: 'Parokhonsk',
-    phone: '+375 44 646-44-44'
-})
-list.add({
-    id: '2',
-    name: 'Valya',
-    email: 'Valya@gmail.com',
-    address: 'Lobcha',
-    phone: '+375 44 222-22-22'
-})
-list.edit(1, {
+list.add(3, 'Nick', 'Tesa@gmail.com', 'Parokhonsk', '+375 44 646-44-44')
+list.add(2, 'Valya', 'Valya@gmail.com', 'Lobcha', '+375 44 222-22-22')
+list.add(6, 'Kostya', 'Kostyaa@gmail.com', 'Luninets', '+375 44 111-11-11')
+list.add(4, 'John', 'John@gmail.com', 'Memphis', '+375 44 222-22-22')
+list.edit(2, {
     email: 'Nick@gmail.com',
     address: 'Pinsk',
 })
+list.remove(3)
