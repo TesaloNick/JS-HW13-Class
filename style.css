@@ -1,0 +1,58 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.contacts{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 900px;
+    border: 2px solid black;
+    border-radius: 10px;
+    justify-items: center;
+    margin: auto;
+    background-color: wheat;
+}
+.form-add, .form-edit, .form-remove{
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 10px;
+}
+.form-add input, .form-edit input, .form-remove input{
+    display: block;
+    width: 90%;
+    padding: 5px 10px;
+    margin: 10px auto;
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: white;
+}
+.form-add button, .form-edit button, .form-remove button{
+    display: block;
+    width: 50%;
+    padding: 5px 10px;
+    margin: 10px auto;
+    border: 0px solid black;
+    border-radius: 3px;
+    background-color: white;
+    cursor: pointer;
+}
+.form-add button:hover, .form-edit button:hover, .form-remove button:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
+    background-color: rgb(73, 48, 0);
+    color: white;
+}
+.form-add, .form-edit{
+    width: 90%;
+    /* height: 400px; */
+}
+.form-remove{
+    width: 50%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    /* height: 200px; */
+}
+h1{
+    text-align: center;
+}
