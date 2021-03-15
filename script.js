@@ -32,7 +32,7 @@ class Contacts{
         let newUser = new Users(event.currentTarget[0].value, event.currentTarget[1].value, event.currentTarget[2].value,  event.currentTarget[3].value, event.currentTarget[4].value)
         // console.log(newUser.data);
         this.data.push(newUser.data)
-        console.log(this.data);
+        console.log(String(newUser.data.id));
         for (let i=0; i < event.currentTarget.length; i++) {
             event.currentTarget[i].value = ''
         }
@@ -46,7 +46,7 @@ class Contacts{
                 for (let key1 in key) {
                     arr.push(key1)
                 }
-                console.log(arr);
+                // console.log(arr);
                 for (let i=1; i < event.currentTarget.length-1; i++) {
                     if (event.currentTarget[i].value !== undefined) {
                         // console.log(key[arr[i]]);
@@ -65,7 +65,7 @@ class Contacts{
         for (let i=0; i < event.currentTarget.length; i++) {
             event.currentTarget[i].value = ''
         }
-        console.log(this.data);
+        // console.log(this.data);
     }
     remove(event) {
         event.preventDefault()
@@ -77,7 +77,10 @@ class Contacts{
         for (let i=0; i < event.currentTarget.length; i++) {
             event.currentTarget[i].value = ''
         }
-        console.log(this.data);
+        // console.log(this.data);
+    }
+    get() {
+        return console.log(this.data);
     }
 
 }
@@ -186,7 +189,8 @@ class ContactsApp extends Contacts{
         document.querySelector('.form-remove').addEventListener('submit', this.remove)
     }
     get(){
-
+        // console.log(this.data);
+        super.get()
     }
 }
 
