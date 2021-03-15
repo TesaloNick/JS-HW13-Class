@@ -33,6 +33,9 @@ class Contacts{
         // console.log(newUser.data);
         this.data.push(newUser.data)
         console.log(this.data);
+        for (let i=0; i < event.currentTarget.length; i++) {
+            event.currentTarget[i].value = ''
+        }
     }
     edit(event) {
         event.preventDefault()
@@ -59,6 +62,9 @@ class Contacts{
                 // }
             }
         }
+        for (let i=0; i < event.currentTarget.length; i++) {
+            event.currentTarget[i].value = ''
+        }
         console.log(this.data);
     }
     remove(event) {
@@ -68,11 +74,12 @@ class Contacts{
                 this.data.splice(i, 1)
             }
         }
+        for (let i=0; i < event.currentTarget.length; i++) {
+            event.currentTarget[i].value = ''
+        }
         console.log(this.data);
     }
-    get() {
-        return this.data
-    }
+
 }
 
 class ContactsApp extends Contacts{
@@ -178,6 +185,9 @@ class ContactsApp extends Contacts{
     onRemove(){
         document.querySelector('.form-remove').addEventListener('submit', this.remove)
     }
+    get(){
+
+    }
 }
 
 
@@ -186,6 +196,7 @@ list.app()
 list.onAdd()
 list.onEdit()
 list.onRemove()
+list.get()
 // list.add()
 // list.add(2, 'Valya', 'Valya@gmail.com', 'Lobcha', '+375 44 222-22-22')
 // list.add(6, 'Kostya', 'Kostyaa@gmail.com', 'Luninets', '+375 44 111-11-11')
