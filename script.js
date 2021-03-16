@@ -27,32 +27,37 @@ class Contacts{
         this.edit = this.edit.bind(this)
         this.remove = this.remove.bind(this)
     }
-    add(event){
+    add(event){     // добаление контакта
         event.preventDefault()
-        let newUser = new Users(event.currentTarget[0].value, event.currentTarget[1].value, event.currentTarget[2].value,  event.currentTarget[3].value, event.currentTarget[4].value)
-        // console.log(newUser.data);
-        this.data.push(newUser.data)
-        // console.log(String(newUser.data.id));
-        for (let i=0; i < event.currentTarget.length; i++) {
+        let newUser = new Users(event.currentTarget[0].value, event.currentTarget[1].value, event.currentTarget[2].value,  event.currentTarget[3].value, event.currentTarget[4].value) // создание объекта с новым контактом
+        let counter = 0
+        for (let key of this.data) {        // проверка на повторение id при добавлении контакта
+            if (this.data.length > 0) {
+                if (event.currentTarget[0].value === key.id) {
+                    alert('Контакт с таким ID уже существует')
+                    counter++
+                } 
+            } 
+        }
+        if (counter === 0) this.data.push(newUser.data) // добавление контакта в массив this.data
+        
+        for (let i=0; i < event.currentTarget.length; i++) { 
             event.currentTarget[i].value = ''
         }
-        console.log(this.data);
         this.result()
+        console.log(this.data);
     }
-    edit(event) {
+    edit(event) {       // редактирлвание контакта в массив this.data
         event.preventDefault()
         for (let key of this.data) {
-            if (+key.id === +event.currentTarget[0].value) {
+            if (+key.id === +event.currentTarget[0].value) { // поиск ID уже созданного контакта и изменяемого
                 let arr = []
-                for (let key1 in key) {
+                for (let key1 in key) { // массив свойст объекта
                     arr.push(key1)
                 }
-                for (let i=1; i < event.currentTarget.length-1; i++) {
+                for (let i=1; i < event.currentTarget.length-1; i++) { // изменение данных объекта
                     if (event.currentTarget[i].value !== undefined) {
-                        // console.log(key[arr[i]]);
-                        // console.log(event.currentTarget[i].value);
                         key[arr[i]] = event.currentTarget[i].value
-                        // console.log(this.data);
                     }
                 }
             }
@@ -63,9 +68,9 @@ class Contacts{
         this.result()
         console.log(this.data);
     }
-    remove(event) {
+    remove(event) {        // удаление контакта в массив this.data
         event.preventDefault()
-        for (let i=0; i < this.data.length; i++) {
+        for (let i=0; i < this.data.length; i++) {  // поиск совпадений по ID
             if (this.data[i].id === event.currentTarget[0].value) {
                 this.data.splice(i, 1)
             }
@@ -76,7 +81,7 @@ class Contacts{
         console.log(this.data);
         this.result()
     }
-    result(){
+    result(){       // вывод результата в контейнер
         document.querySelector('.result-contacts').innerHTML = ''
         let counter = 1;
         for (let key of this.data) {
@@ -84,9 +89,8 @@ class Contacts{
             document.querySelector('.result-contacts').appendChild(h2)
             h2.innerHTML = `Контакт №${counter}`
             counter++
-            for (let key1 in key) {
-                // console.log(key1);
-                let string = document.createElement('p') 
+            for (let key1 in key) { // вовод строк со свойствами объекта
+               let string = document.createElement('p') 
                 document.querySelector('.result-contacts').appendChild(string)
                 string.innerHTML = `${key1}: ${key[key1]}`
             }
@@ -102,7 +106,7 @@ class Contacts{
 }
 
 class ContactsApp extends Contacts{
-    app(){
+    app(){          // создание контейнера в DOM
         let div = document.createElement('div')
         div.classList.add('contacts')
         document.body.appendChild(div)
@@ -195,21 +199,20 @@ class ContactsApp extends Contacts{
         buttonRemoveContact.innerHTML = "Удалить контакт"
         formRemove.appendChild(buttonRemoveContact)
 
-        let resultContacts = document.createElement('div') 
+        let resultContacts = document.createElement('div') // добавление контейнера с текстом
         resultContacts.classList.add('result-contacts')
         document.querySelector('.contacts').appendChild(resultContacts)
     }
-    onAdd(){
+    onAdd(){        // добавление данных из DOM в массив
         document.querySelector('.form-add').addEventListener('submit', this.add)
     }
-    onEdit(){
+    onEdit(){        // изменение данных из DOM в массив
         document.querySelector('.form-edit').addEventListener('submit', this.edit)
     }
-    onRemove(){
+    onRemove(){        // удаление данных из DOM в массив
         document.querySelector('.form-remove').addEventListener('submit', this.remove)
     }
     get(){
-        // console.log(this.data);
         super.get()
     }
 }
