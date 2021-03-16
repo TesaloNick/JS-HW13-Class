@@ -45,14 +45,28 @@
 }
 .form-add, .form-edit{
     width: 90%;
-    /* height: 400px; */
 }
 .form-remove{
     width: 50%;
     grid-column-start: 1;
     grid-column-end: 3;
-    /* height: 200px; */
 }
 h1{
     text-align: center;
+}
+.result-contacts{
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    width: 50%;
+    height: 200px;
+    border: 2px solid black;
+    border-radius: 10px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background-color: white;
+    overflow: auto;
+}
+h2{
+    font-size: 18px;
 }

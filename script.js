@@ -32,21 +32,21 @@ class Contacts{
         let newUser = new Users(event.currentTarget[0].value, event.currentTarget[1].value, event.currentTarget[2].value,  event.currentTarget[3].value, event.currentTarget[4].value)
         // console.log(newUser.data);
         this.data.push(newUser.data)
-        console.log(String(newUser.data.id));
+        // console.log(String(newUser.data.id));
         for (let i=0; i < event.currentTarget.length; i++) {
             event.currentTarget[i].value = ''
         }
+        console.log(this.data);
+        this.result()
     }
     edit(event) {
         event.preventDefault()
         for (let key of this.data) {
-            // console.log(key);
             if (+key.id === +event.currentTarget[0].value) {
                 let arr = []
                 for (let key1 in key) {
                     arr.push(key1)
                 }
-                // console.log(arr);
                 for (let i=1; i < event.currentTarget.length-1; i++) {
                     if (event.currentTarget[i].value !== undefined) {
                         // console.log(key[arr[i]]);
@@ -55,17 +55,13 @@ class Contacts{
                         // console.log(this.data);
                     }
                 }
-                // for (let key1 in key) {
-                    // if (obj[key1] !== undefined){
-                    //     key[key1] = obj[key1]
-                    // }
-                // }
             }
         }
         for (let i=0; i < event.currentTarget.length; i++) {
             event.currentTarget[i].value = ''
         }
-        // console.log(this.data);
+        this.result()
+        console.log(this.data);
     }
     remove(event) {
         event.preventDefault()
@@ -77,7 +73,27 @@ class Contacts{
         for (let i=0; i < event.currentTarget.length; i++) {
             event.currentTarget[i].value = ''
         }
-        // console.log(this.data);
+        console.log(this.data);
+        this.result()
+    }
+    result(){
+        document.querySelector('.result-contacts').innerHTML = ''
+        let counter = 1;
+        for (let key of this.data) {
+            let h2 = document.createElement('h2') 
+            document.querySelector('.result-contacts').appendChild(h2)
+            h2.innerHTML = `Контакт №${counter}`
+            counter++
+            for (let key1 in key) {
+                // console.log(key1);
+                let string = document.createElement('p') 
+                document.querySelector('.result-contacts').appendChild(string)
+                string.innerHTML = `${key1}: ${key[key1]}`
+            }
+            let line = document.createElement('p') 
+            document.querySelector('.result-contacts').appendChild(line)
+            line.innerHTML = `---------------------`
+        }
     }
     get() {
         return console.log(this.data);
@@ -178,6 +194,10 @@ class ContactsApp extends Contacts{
         buttonRemoveContact.classList.add('button-remove-contact')
         buttonRemoveContact.innerHTML = "Удалить контакт"
         formRemove.appendChild(buttonRemoveContact)
+
+        let resultContacts = document.createElement('div') 
+        resultContacts.classList.add('result-contacts')
+        document.querySelector('.contacts').appendChild(resultContacts)
     }
     onAdd(){
         document.querySelector('.form-add').addEventListener('submit', this.add)
@@ -200,7 +220,7 @@ list.app()
 list.onAdd()
 list.onEdit()
 list.onRemove()
-list.get()
+// list.get()
 // list.add()
 // list.add(2, 'Valya', 'Valya@gmail.com', 'Lobcha', '+375 44 222-22-22')
 // list.add(6, 'Kostya', 'Kostyaa@gmail.com', 'Luninets', '+375 44 111-11-11')
