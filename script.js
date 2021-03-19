@@ -138,7 +138,7 @@ class ContactsApp extends Contacts{
         </form>
         <form class="form-remove">
             <h1>Удалить контакт</h1>
-            <input type="tel" placeholder="phone" class="phone-remove">
+            <input type="tel" placeholder="id" class="id-remove">
             <button class="button-remove-contact">Удалить контакт</button>
         </form>
         <div class="result-contacts"></div>
